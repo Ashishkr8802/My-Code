@@ -11,7 +11,7 @@ public:
             int mid = first + (end - first)/2;
 
             if(isBadVersion(mid)) {
-                end = mid ;
+                end = mid;
             }
 
             else {
