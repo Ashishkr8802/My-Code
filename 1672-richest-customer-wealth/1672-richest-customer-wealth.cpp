@@ -6,11 +6,11 @@ public:
         int maxi = INT_MIN;
 
         for(int i=0 ; i<row ; i++) {
-            int sum = 0;
-            for(int j=0 ; j<col ; j++) {
+            int sum=0;
+            for(int j = 0 ; j<col ; j++) {
                 sum += accounts[i][j];
             }
-            maxi = max(sum , maxi);
+            maxi = max(maxi , sum);
         }
 
         return maxi;
