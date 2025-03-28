@@ -21,11 +21,13 @@ public:
         ListNode* temp = head;
 
         while (temp != NULL && temp->next != NULL) {
-            if (temp->next != NULL && temp->next->val == val) {
-                temp->next = temp->next->next;
+            if (temp->next->val == val) {
+                // ListNode* nodeToDelete = temp->next;
+                temp->next = temp->next->next;  // Remove node
+                // delete nodeToDelete;  // Free memory
+            } else {
+                temp = temp->next;  // Move forward only if no deletion
             }
-
-            temp = temp->next;
         }
         return head;
     }
