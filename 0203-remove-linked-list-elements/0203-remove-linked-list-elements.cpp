@@ -22,11 +22,9 @@ public:
 
         while (temp != NULL && temp->next != NULL) {
             if (temp->next->val == val) {
-                // ListNode* nodeToDelete = temp->next;
-                temp->next = temp->next->next;  // Remove node
-                // delete nodeToDelete;  // Free memory
+                temp->next = temp->next->next;
             } else {
-                temp = temp->next;  // Move forward only if no deletion
+                temp = temp->next;
             }
         }
         return head;
