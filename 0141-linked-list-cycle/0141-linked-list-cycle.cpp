@@ -14,16 +14,16 @@ public:
 
         while(fast != NULL) {
             fast = fast->next;
-
             if(fast != NULL) {
                 fast = fast->next;
                 slow = slow->next;
             }
 
-            if(slow == fast) {
+            if(fast == slow) {
                 return true;
             }
         }
+
         return false;
     }
 };
