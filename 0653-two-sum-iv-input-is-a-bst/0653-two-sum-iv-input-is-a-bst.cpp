@@ -15,13 +15,11 @@ public:
         if(root == NULL) {
             return;
         }
-        //LNR
-
         storeInorder(root->left , inorder);
         inorder.push_back(root->val);
         storeInorder(root->right , inorder);
     }
-
+    
     bool findTarget(TreeNode* root, int k) {
         vector<int> inorder;
         storeInorder(root , inorder);
@@ -41,6 +39,7 @@ public:
                 end--;
             }
         }
+
         return false;
     }
 };
