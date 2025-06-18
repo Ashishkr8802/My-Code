@@ -1,21 +1,32 @@
 class Solution {
 public:
-    int coinChange(vector<int>& coins, int amount) {
-        vector<int> dp(amount+1 , amount+1);
-        dp[0] = 0;
+    int solveUsingRecursion(vector<int> &coins , int amount) {
+        if(amount == 0) {
+            return 0;
+        }
 
-        // for(int i = 1 ; i < amount ; i++) {
-        //     dp[i] = amount+1;
-        // }
+        int mini = INT_MAX;
 
-        for(int i=1 ; i<= amount ; i++) {
-            for(int j=0 ; j < coins.size() ; j++) {
-                if(coins[j] <= i) {
-                    dp[i] = min(dp[i] , dp[i-coins[j]] + 1);
+        for(int i=0 ; i<coins.size() ; i++) {
+            if(amount - coins[i] >=0) {
+                int recursionKaAns = solveUsingRecursion(coins , amount - coins[i]);
+                if(recursionKaAns != INT_MAX) {
+                    int ans = 1 + recursionKaAns;
+                    mini = min(ans , mini);
                 }
             }
         }
 
-        return dp[amount] <= amount ? dp[amount] : -1;
+        return mini;
+    }
+    int coinChange(vector<int>& coins, int amount) {
+        int ans = solveUsingRecursion(coins , amount);
+        if(ans == INT_MAX) {
+            return -1;
+        }
+
+        else {
+            return ans;
+        }
     }
 };
