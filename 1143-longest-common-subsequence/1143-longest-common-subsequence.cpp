@@ -1,54 +1,33 @@
 class Solution {
 public:
-    // int solveUsingRecursion(string a , string b , int i , int j) {
-    //     if(i >= a.length() || j >= b.length()) {
-    //         return 0;
-    //     }
 
-    //     int ans = 0;
-    //     if(a[i] == b[j]) {
-    //         ans = 1 + solveUsingRecursion(a , b , i+1 , j+1);
-    //     }
-
-    //     else {
-    //         ans = 0 + max(solveUsingRecursion(a,b,i,j+1) , solveUsingRecursion(a,b,i+1,j));
-    //     }
-
-    //     return ans;
-    // }
-
-    int solveUsingMemo(string a , string b , int i , int j , vector<vector<int>>& dp) {
-        if(i >= a.length() || j >= b.length()) {
+    int solveUsingMemo(int i , int j , string &text1 , string &text2 ,  vector<vector<int>> &dp) {
+        if(i >= text1.length() || j >= text2.length()) {
             return 0;
         }
-
-        int ans = 0;
 
         if(dp[i][j] != -1) {
             return dp[i][j];
         }
 
-
-        if(a[i] == b[j]) {
-            ans = 1 + solveUsingMemo(a , b , i+1 , j+1 , dp);
+        int ans;
+        if(text1[i] == text2[j]) {
+            ans = 1 + solveUsingMemo(i+1 , j+1 , text1 , text2 , dp);
         }
-
         else {
-            ans = 0 + max(solveUsingMemo(a,b,i,j+1,dp) , solveUsingMemo(a,b,i+1,j,dp));
+            ans = max(solveUsingMemo(i+1 , j , text1 , text2 , dp) , solveUsingMemo(i , j+1 , text1 , text2 , dp));
         }
+
         dp[i][j] = ans;
-        return dp[i][j];
+
+        return ans;
     }
 
     int longestCommonSubsequence(string text1, string text2) {
-        int i = 0;
-        int j = 0;
+        vector<vector<int>> dp(text1.length() , vector<int> (text2.length() , -1));
 
-        // int ans = solveUsingRecursion(text1 , text2 , i , j);
+        int ans = solveUsingMemo(0, 0 , text1 , text2 , dp);
 
-        vector<vector<int>> dp(text1.length()+1 , vector<int>(text2.length()+1 , -1));
-
-        int ans = solveUsingMemo(text1 , text2 , i , j , dp);
         return ans;
     }
 };
