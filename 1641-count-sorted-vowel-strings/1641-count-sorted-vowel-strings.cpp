@@ -1,16 +1,20 @@
 class Solution {
 public:
+    int solveUsingRecursion(int start , int length , int n) {
+        if(length == n) {
+            return 1;
+        }
+
+        int count = 0;
+
+        for(int i=start ; i<5 ; i++) {
+            count += solveUsingRecursion(i , length+1 , n);
+        }
+
+        return count;
+    }
     int countVowelStrings(int n) {
-        vector<int> ans(5,1);
-        for(int i=2 ; i<=n ; i++) {
-            for(int j=3 ; j>=0 ; j--) {
-                ans[j] += ans[j+1];
-            }
-        }
-        int sum = 0;
-        for(auto a : ans) {
-            sum += a;
-        }
-        return sum;
+        int ans = solveUsingRecursion(0,0,n);
+        return ans;
     }
 };
